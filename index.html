@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sichqoncha Qochadi - A fun and addictive clicking game">
+    <meta name="theme-color" content="#0f0f1e">
+    <title>Sichqoncha Qochadi - Meni Bosishga Urinma</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <div id="gameContainer" class="game-container">
+        <!-- Main Menu -->
+        <div id="mainMenu" class="screen menu-screen active">
+            <div class="menu-content">
+                <h1 class="game-title">SICHQONCHA QOCHADI</h1>
+                <p class="game-subtitle">MENI BOSISHGA URINMA.</p>
+                
+                <div class="menu-buttons">
+                    <button class="btn btn-primary" id="btnStart" data-action="start">BOSHLASH</button>
+                    <button class="btn btn-secondary" id="btnLevels" data-action="levels">LEVELS</button>
+                    <button class="btn btn-secondary" id="btnEndless" data-action="endless">ENDLESS</button>
+                    <button class="btn btn-secondary" id="btnChallenge" data-action="challenge">30 SECOND</button>
+                    <button class="btn btn-secondary" id="btnAchievements" data-action="achievements">ACHIEVEMENTS</button>
+                    <button class="btn btn-secondary" id="btnLeaderboard" data-action="leaderboard">LEADERBOARD</button>
+                    <button class="btn btn-secondary" id="btnSettings" data-action="settings">SETTINGS</button>
+                </div>
+            </div>
+            <div class="menu-footer">
+                <p>v1.0.0</p>
+            </div>
+        </div>
+
+        <!-- Level Select -->
+        <div id="levelSelect" class="screen level-select-screen">
+            <div class="level-select-content">
+                <h2>SELECT LEVEL</h2>
+                <div class="level-grid" id="levelGrid"></div>
+                <button class="btn btn-secondary" id="btnBackLevels">BACK</button>
+            </div>
+        </div>
+
+        <!-- Game Screen -->
+        <div id="gameScreen" class="screen game-screen">
+            <div class="hud">
+                <div class="hud-item">
+                    <span class="hud-label">LEVEL</span>
+                    <span class="hud-value" id="hudLevel">1</span>
+                </div>
+                <div class="hud-item">
+                    <span class="hud-label">SCORE</span>
+                    <span class="hud-value" id="hudScore">0</span>
+                </div>
+                <div class="hud-item">
+                    <span class="hud-label">COMBO</span>
+                    <span class="hud-value" id="hudCombo">0</span>
+                </div>
+                <div class="hud-item">
+                    <span class="hud-label">TIME</span>
+                    <span class="hud-value" id="hudTime">0</span>
+                </div>
+                <button class="btn btn-icon" id="btnPause" title="Pause">⏸</button>
+            </div>
+            <div class="game-area" id="gameArea"></div>
+            <div class="message-popup" id="messagePopup"></div>
+        </div>
+
+        <!-- Pause Menu -->
+        <div id="pauseMenu" class="screen pause-screen">
+            <div class="pause-content">
+                <h2>PAUSED</h2>
+                <div class="pause-buttons">
+                    <button class="btn btn-primary" id="btnResume">RESUME</button>
+                    <button class="btn btn-secondary" id="btnRestartPause">RESTART</button>
+                    <button class="btn btn-secondary" id="btnQuitLevel">QUIT</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Level Complete -->
+        <div id="levelComplete" class="screen result-screen">
+            <div class="result-content">
+                <h2>LEVEL COMPLETE!</h2>
+                <div class="result-stats">
+                    <div class="stat-row">
+                        <span>SCORE</span>
+                        <span id="resultScore">0</span>
+                    </div>
+                    <div class="stat-row">
+                        <span>TIME</span>
+                        <span id="resultTime">0s</span>
+                    </div>
+                    <div class="stat-row">
+                        <span>CLICKS</span>
+                        <span id="resultClicks">0</span>
+                    </div>
+                    <div class="stat-row">
+                        <span>COMBO</span>
+                        <span id="resultCombo">x0</span>
+                    </div>
+                </div>
+                <div class="result-buttons">
+                    <button class="btn btn-primary" id="btnNextLevel">NEXT LEVEL</button>
+                    <button class="btn btn-secondary" id="btnRetryLevel">RETRY</button>
+                    <button class="btn btn-secondary" id="btnMenuLevel">MENU</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Challenge Result -->
+        <div id="challengeResult" class="screen result-screen">
+            <div class="result-content">
+                <h2>CHALLENGE COMPLETE!</h2>
+                <div class="result-stats">
+                    <div class="stat-row">
+                        <span>SCORE</span>
+                        <span id="challengeScore">0</span>
+                    </div>
+                    <div class="stat-row">
+                        <span>CLICKS</span>
+                        <span id="challengeClicks">0</span>
+                    </div>
+                    <div class="stat-row">
+                        <span>COMBO</span>
+                        <span id="challengeCombo">x0</span>
+                    </div>
+                </div>
+                <div class="result-buttons">
+                    <button class="btn btn-primary" id="btnRetryChallenge">RETRY</button>
+                    <button class="btn btn-secondary" id="btnMenuChallenge">MENU</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Endless Result -->
+        <div id="endlessResult" class="screen result-screen">
+            <div class="result-content">
+                <h2>GAME OVER!</h2>
+                <div class="result-stats">
+                    <div class="stat-row">
+                        <span>SCORE</span>
+                        <span id="endlessScore">0</span>
+                    </div>
+                    <div class="stat-row">
+                        <span>LEVEL REACHED</span>
+                        <span id="endlessLevel">1</span>
+                    </div>
+                    <div class="stat-row">
+                        <span>CLICKS</span>
+                        <span id="endlessClicks">0</span>
+                    </div>
+                </div>
+                <div class="result-buttons">
+                    <button class="btn btn-primary" id="btnRetryEndless">RETRY</button>
+                    <button class="btn btn-secondary" id="btnMenuEndless">MENU</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Achievements -->
+        <div id="achievementsScreen" class="screen achievements-screen">
+            <div class="achievements-content">
+                <h2>ACHIEVEMENTS</h2>
+                <div class="achievements-list" id="achievementsList"></div>
+                <button class="btn btn-secondary" id="btnBackAchievements">BACK</button>
+            </div>
+        </div>
+
+        <!-- Leaderboard -->
+        <div id="leaderboardScreen" class="screen leaderboard-screen">
+            <div class="leaderboard-content">
+                <h2>LEADERBOARD</h2>
+                <div class="leaderboard-input">
+                    <input type="text" id="playerName" placeholder="Enter your name" maxlength="20">
+                    <button class="btn btn-small" id="btnSetName">SET</button>
+                </div>
+                <div class="leaderboard-list" id="leaderboardList"></div>
+                <button class="btn btn-secondary" id="btnBackLeaderboard">BACK</button>
+            </div>
+        </div>
+
+        <!-- Settings -->
+        <div id="settingsScreen" class="screen settings-screen">
+            <div class="settings-content">
+                <h2>SETTINGS</h2>
+                <div class="settings-group">
+                    <label>
+                        <input type="checkbox" id="settingSound" checked>
+                        <span>Sound</span>
+                    </label>
+                    <label>
+                        <input type="checkbox" id="settingMusic" checked>
+                        <span>Music</span>
+                    </label>
+                    <label>
+                        <input type="checkbox" id="settingVibration" checked>
+                        <span>Vibration</span>
+                    </label>
+                </div>
+                <div class="settings-group">
+                    <label>
+                        <span>Quality</span>
+                        <select id="settingQuality">
+                            <option value="low">Low</option>
+                            <option value="medium" selected>Medium</option>
+                            <option value="high">High</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="settings-group">
+                    <button class="btn btn-danger" id="btnResetProgress">RESET PROGRESS</button>
+                </div>
+                <button class="btn btn-secondary" id="btnBackSettings">BACK</button>
+            </div>
+        </div>
+
+        <!-- Victory Screen -->
+        <div id="victoryScreen" class="screen victory-screen">
+            <div class="victory-content">
+                <h1>YOU WIN!</h1>
+                <p class="victory-message">You've conquered all 20 levels!</p>
+                <div class="victory-stats" id="victoryStats"></div>
+                <div class="victory-buttons">
+                    <button class="btn btn-primary" id="btnPlayEndless">ENDLESS MODE</button>
+                    <button class="btn btn-secondary" id="btnMenuVictory">MENU</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/storage.js"></script>
+    <script src="js/audio.js"></script>
+    <script src="js/particles.js"></script>
+    <script src="js/settings.js"></script>
+    <script src="js/score.js"></script>
+    <script src="js/achievements.js"></script>
+    <script src="js/leaderboard.js"></script>
+    <script src="js/levels.js"></script>
+    <script src="js/button.js"></script>
+    <script src="js/yandexSDK.js"></script>
+    <script src="js/AdvertisementManager.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/game.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
